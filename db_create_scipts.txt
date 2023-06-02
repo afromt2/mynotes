@@ -1,0 +1,34 @@
+$2y$10$ssGKWldORweLDroJOuUY5OG4xeUm4adoL9Nm0LFPxJt5Aw5rZcsUG
+
+
+
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS mynotes;
+
+-- Switch to the database
+USE mynotes;
+
+-- Create the users table
+CREATE TABLE IF NOT EXISTS users (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  is_admin TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the notes table
+CREATE TABLE IF NOT EXISTS notes (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT(11) UNSIGNED NOT NULL,
+  customer_name VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(20) NOT NULL,
+  content TEXT NOT NULL,
+  reminder_datetime DATETIME,
+  country VARCHAR(50),
+  type VARCHAR(50),
+  property_type VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
